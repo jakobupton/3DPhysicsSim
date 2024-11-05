@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://co00l8yywsy5j"]
+
+[ext_resource type="Script" path="res://DoublePendulum.cs" id="1_i2o5m"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_des0g"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_s6sj1"]
+
+[node name="DoublePendulum" type="Node3D"]
+script = ExtResource("1_i2o5m")
+
+[node name="Arm1" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arm1"]
+transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, -1, 0)
+mesh = SubResource("CylinderMesh_des0g")
+
+[node name="Arm2Pivot" type="Node3D" parent="Arm1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+
+[node name="Arm2" type="Node3D" parent="Arm1/Arm2Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arm1/Arm2Pivot/Arm2"]
+transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_s6sj1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.97473)
+fov = 70.3125
