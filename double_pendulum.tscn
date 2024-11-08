@@ -1,10 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://co00l8yywsy5j"]
+[gd_scene load_steps=8 format=3 uid="uid://co00l8yywsy5j"]
 
 [ext_resource type="Script" path="res://DoublePendulum.cs" id="1_i2o5m"]
+[ext_resource type="Texture2D" uid="uid://c3w2ga26sthnm" path="res://sky_t.png" id="2_l80nh"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_des0g"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_s6sj1"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_amtgg"]
+panorama = ExtResource("2_l80nh")
+
+[sub_resource type="Sky" id="Sky_4e2tt"]
+sky_material = SubResource("PanoramaSkyMaterial_amtgg")
+
+[sub_resource type="Environment" id="Environment_ybf88"]
+background_mode = 2
+sky = SubResource("Sky_4e2tt")
 
 [node name="DoublePendulum" type="Node3D"]
 script = ExtResource("1_i2o5m")
@@ -26,5 +37,11 @@ transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_s6sj1")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.97473)
+transform = Transform3D(1, 0, 0, 0, 0.973022, -0.230712, 0, 0.230712, 0.973022, 0, -1.19972, 7.97473)
 fov = 70.3125
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Camera3D"]
+environment = SubResource("Environment_ybf88")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.966591, 0.529673)
