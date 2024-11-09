@@ -15,7 +15,7 @@ public partial class Camera3d : Camera3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Input.MouseMode = Input.MouseModeEnum.Hidden;
+		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -26,6 +26,8 @@ public partial class Camera3d : Camera3D
 			{
 				GetTree().Quit();
 			}
+
+			
 		}
 		if (@event is InputEventMouseMotion mouseEvent)
 		{
@@ -35,6 +37,25 @@ public partial class Camera3d : Camera3D
 
 			// Clamp vertical angle
 			_yangle = Mathf.Clamp(_yangle, -Mathf.Pi / 4, Mathf.Pi / 4);
+
+			// Set mouse to Center
+			Input.WarpMouse(GetViewport().GetVisibleRect().Size / 2);
+		}
+
+		// Zoom in and out implementations
+		if (@event is InputEventMouseButton mouseButton)
+		{
+			if (mouseButton.ButtonIndex == MouseButton.WheelUp)
+        	{
+            	DISTANCE -= 0.2f;
+				DISTANCE = Mathf.Clamp(DISTANCE, 1, 10);
+            	// Your code for scrolling up
+        	}
+    		else if (mouseButton.ButtonIndex == MouseButton.WheelDown)
+        	{
+            	DISTANCE += 0.2f;
+				DISTANCE = Mathf.Clamp(DISTANCE, 1, 10);
+        	}
 		}
 
 		if (@event is InputEventPanGesture panEvent)
