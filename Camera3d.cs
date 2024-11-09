@@ -18,16 +18,6 @@ public partial class Camera3d : Camera3D
 		Input.MouseMode = Input.MouseModeEnum.Hidden;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-		// Get user input
-		if (Input.IsKeyPressed(Key.Escape)) 
-        {
-            GetTree().Quit();
-        }
-	}
-
 	public override void _Input(InputEvent @event)
 	{
 		if (@event is InputEventKey keyEvent)
