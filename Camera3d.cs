@@ -10,28 +10,60 @@ public partial class Camera3d : Camera3D
 	float _yangle;
 
 	// Distance from the center
-	const float DISTANCE = 10;
+	float DISTANCE = 5;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Input.MouseMode = Input.MouseModeEnum.Hidden;
+		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void _Input(InputEvent @event)
 	{
-		// Get user input
-		if (Input.IsKeyPressed(Key.Escape)) 
-        {
-            GetTree().Quit();
-        }
-		var currentMousePosition = GetViewport().GetMousePosition();
-        var relativeMousePosition = (GetViewport().GetVisibleRect().Size / 2) - currentMousePosition;
-        Input.WarpMouse(GetViewport().GetVisibleRect().Size / 2);  // Keep mouse centered
+		if (@event is InputEventKey keyEvent)
+		{
+			if (keyEvent.Pressed && keyEvent.Keycode == Key.Escape)
+			{
+				GetTree().Quit();
+			}
 
-		_angle -= relativeMousePosition.X * 0.01f;
-		_yangle -= relativeMousePosition.Y * 0.01f;
+			
+		}
+		if (@event is InputEventMouseMotion mouseEvent)
+		{
+			// Rotate camera
+			_angle -= mouseEvent.Relative.X * 0.01f;
+			_yangle -= mouseEvent.Relative.Y * 0.01f;
+
+			// Clamp vertical angle
+			_yangle = Mathf.Clamp(_yangle, -Mathf.Pi / 4, Mathf.Pi / 4);
+
+			// Set mouse to Center
+			Input.WarpMouse(GetViewport().GetVisibleRect().Size / 2);
+		}
+
+		// Zoom in and out implementations
+		if (@event is InputEventMouseButton mouseButton)
+		{
+			if (mouseButton.ButtonIndex == MouseButton.WheelUp)
+        	{
+            	DISTANCE -= 0.2f;
+				DISTANCE = Mathf.Clamp(DISTANCE, 1, 10);
+            	// Your code for scrolling up
+        	}
+    		else if (mouseButton.ButtonIndex == MouseButton.WheelDown)
+        	{
+            	DISTANCE += 0.2f;
+				DISTANCE = Mathf.Clamp(DISTANCE, 1, 10);
+        	}
+		}
+
+		if (@event is InputEventPanGesture panEvent)
+		{
+			
+			DISTANCE += panEvent.Delta.Y * 0.1f;
+			DISTANCE = Mathf.Clamp(DISTANCE, 1, 10);
+		}
 
 		// Move camera
 		Position = new Vector3(
