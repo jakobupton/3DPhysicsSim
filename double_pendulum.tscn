@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://co00l8yywsy5j"]
+[gd_scene load_steps=14 format=3 uid="uid://co00l8yywsy5j"]
 
 [ext_resource type="Script" path="res://DoublePendulum.cs" id="1_i2o5m"]
 [ext_resource type="Script" path="res://Camera3d.cs" id="2_02vme"]
 [ext_resource type="Texture2D" uid="uid://c3w2ga26sthnm" path="res://sky_t.png" id="2_l80nh"]
 [ext_resource type="ArrayMesh" uid="uid://csjbee3bopdy5" path="res://GrassMesh/grass.res" id="4_f0sox"]
+[ext_resource type="Script" path="res://Grass.cs" id="5_i6e64"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_des0g"]
 
@@ -71,3 +72,4 @@ skeleton = NodePath("../Camera3D")
 transform = Transform3D(1, 0, 0, 0, 0.999833, 0.0182727, 0, -0.0182727, 0.999833, 0, -6.47005, -1.21552)
 cast_shadow = 0
 multimesh = SubResource("MultiMesh_20iue")
+script = ExtResource("5_i6e64")

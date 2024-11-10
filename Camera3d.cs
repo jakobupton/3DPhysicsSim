@@ -26,9 +26,8 @@ public partial class Camera3d : Camera3D
 			{
 				GetTree().Quit();
 			}
-
-			
 		}
+
 		if (@event is InputEventMouseMotion mouseEvent)
 		{
 			// Rotate camera
@@ -37,9 +36,6 @@ public partial class Camera3d : Camera3D
 
 			// Clamp vertical angle
 			_yangle = Mathf.Clamp(_yangle, -Mathf.Pi / 4, Mathf.Pi / 4);
-
-			// Set mouse to Center
-			Input.WarpMouse(GetViewport().GetVisibleRect().Size / 2);
 		}
 
 		// Zoom in and out implementations
@@ -49,7 +45,6 @@ public partial class Camera3d : Camera3D
         	{
             	DISTANCE -= 0.2f;
 				DISTANCE = Mathf.Clamp(DISTANCE, 1, 10);
-            	// Your code for scrolling up
         	}
     		else if (mouseButton.ButtonIndex == MouseButton.WheelDown)
         	{
@@ -58,6 +53,7 @@ public partial class Camera3d : Camera3D
         	}
 		}
 
+		// this should be for touch pads
 		if (@event is InputEventPanGesture panEvent)
 		{
 			
