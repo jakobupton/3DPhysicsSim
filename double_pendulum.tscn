@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://DoublePendulum.cs" id="1_i2o5m"]
 [ext_resource type="Script" path="res://Camera3d.cs" id="2_02vme"]
 [ext_resource type="Texture2D" uid="uid://c3w2ga26sthnm" path="res://sky_t.png" id="2_l80nh"]
+[ext_resource type="Script" path="res://Trail.cs" id="2_yhoki"]
 [ext_resource type="ArrayMesh" uid="uid://csjbee3bopdy5" path="res://GrassMesh/grass.res" id="4_f0sox"]
 [ext_resource type="Script" path="res://Grass.cs" id="5_i6e64"]
 
@@ -51,6 +52,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Arm1/Arm2Pivot/Arm2"]
 transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_s6sj1")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Arm1/Arm2Pivot/Arm2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.04076, 0)
+script = ExtResource("2_yhoki")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.973022, -0.230712, 0, 0.230712, 0.973022, 0, -1.19972, 7.97473)
